@@ -41,55 +41,62 @@
 <div data-role="page" id="game">
 
 	<div data-role="header">
-		<h1>Bar</h1>
+    <table data-role="table" id="my-table" data-mode="reflow" style="margin:0 auto;" dir="rtl">
+      <tr>
+			  <td><a id="c01" data-role="button">7</a></td>
+			  <td><a id="c02" data-role="button">שחקן א</a></td>
+			  <td><a id="c03" data-role="button">נגד</a></td>
+			  <td><a id="c04" data-role="button">שחקן ב</a></td>
+        <td><a id="c05" data-role="button">13</a></td>
+			</tr>
+    </table>
 	</div><!-- /header -->
 
 	<div data-role="content">	
-		<p>I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is beeing clicked.</p>		
 		<p><a href="#main">Back to foo</a></p>	
 		<table data-role="table" id="my-table" data-mode="reflow">
 		  <tbody>
 			<tr>
-			  <td><a href="#game" data-role="button">א</a></td>
-			  <td><a href="#game" data-role="button">ש</a></td>
-			  <td><a href="#game" data-role="button">ג</a></td>
-			  <td><a href="#game" data-role="button">ב</a></td>
-        <td><a href="#game" data-role="button">ב</a></td>
-			</tr>
-      <tr>
-			  <td><a href="#game" data-role="button">א</a></td>
-			  <td><a href="#game" data-role="button">ש</a></td>
-			  <td><a href="#game" data-role="button">ג</a></td>
-			  <td><a href="#game" data-role="button">ב</a></td>
-        <td><a href="#game" data-role="button">ב</a></td>
-			</tr>
-      <tr>
-			  <td><a href="#game" data-role="button">א</a></td>
-			  <td><a href="#game" data-role="button">ש</a></td>
-			  <td><a href="#game" data-role="button">ג</a></td>
-			  <td><a href="#game" data-role="button">ב</a></td>
-        <td><a href="#game" data-role="button">ב</a></td>
-			</tr>
-      <tr>
-			  <td><a href="#game" data-role="button">א</a></td>
-			  <td><a href="#game" data-role="button">ש</a></td>
-			  <td><a href="#game" data-role="button">ג</a></td>
-			  <td><a href="#game" data-role="button">ב</a></td>
-        <td><a href="#game" data-role="button">ב</a></td>
-			</tr>
-      <tr>
-			  <td><a href="#game" data-role="button">א</a></td>
-			  <td><a href="#game" data-role="button">ש</a></td>
-			  <td><a href="#game" data-role="button">ג</a></td>
-			  <td><a href="#game" data-role="button">ב</a></td>
-        <td><a href="#game" data-role="button">ב</a></td>
+			  <td><a id="c01" data-role="button">א</a></td>
+			  <td><a id="c02" data-role="button">ש</a></td>
+			  <td><a id="c03" data-role="button">ג</a></td>
+			  <td><a id="c04" data-role="button">ב</a></td>
+        <td><a id="c05" data-role="button">ב</a></td>
+			</tr>    
+      <tr>     
+			  <td><a id="c06" data-role="button">א</a></td>
+			  <td><a id="c07" data-role="button">ש</a></td>
+			  <td><a id="c08" data-role="button">ג</a></td>
+			  <td><a id="c09" data-role="button">ב</a></td>
+        <td><a id="c10" data-role="button">ב</a></td>
+			</tr>        
+      <tr>     
+			  <td><a id="c11" data-role="button">א</a></td>
+			  <td><a id="c12" data-role="button">ש</a></td>
+			  <td><a id="c13" data-role="button">ג</a></td>
+			  <td><a id="c14" data-role="button">ב</a></td>
+        <td><a id="c15" data-role="button">ב</a></td>
+			</tr>    
+      <tr>     
+			  <td><a id="c16" data-role="button">א</a></td>
+			  <td><a id="c17" data-role="button">ש</a></td>
+			  <td><a id="c18" data-role="button">ג</a></td>
+			  <td><a id="c19" data-role="button">ב</a></td>
+        <td><a id="c20" data-role="button">ב</a></td>
+			</tr>    
+      <tr>     
+			  <td><a id="c21" href="#game" data-role="button">א</a></td>
+			  <td><a id="c22" href="#game" data-role="button">ש</a></td>
+			  <td><a id="c23" href="#game" data-role="button">ג</a></td>
+			  <td><a id="c24" href="#game" data-role="button">ב</a></td>
+        <td><a id="c25" href="#game" data-role="button">ב</a></td>
 			</tr>
 			</tbody>
 		</table>
 	</div><!-- /content -->
 
-	<div data-role="footer">
-		<h4>Page Footer</h4>
+	<div data-role="footer" dir="rtl">
+		<a href="dialog.html" data-rel="dialog" data-transition="slidedown">הצג שאלה</a>
 	</div><!-- /footer -->
 </div><!-- /page -->
 </body>
