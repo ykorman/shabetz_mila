@@ -53,3 +53,14 @@ TODO
 ====
 * Use Apple specific "Web Clip" API to create an icon for the game and other stuff (See http://tinyurl.com/7384jyk)
 *
+
+IDEAS
+=====
+* Build a list of letter occurrences based on Scrabble values (a list of 27 integers).
+* To generate random letters based on occurrence, we generate a list of letters based on the following algorithm:
+	MAX_OCC = 10
+	for l in occ_list:
+		for c in range(l):
+			letter_list.append(MAX_OCC - letters[l])
+	Then we get random values from the letter_list.
+* If we decide not to use "final" letters, then their occurrence should be MAX_OCC. 

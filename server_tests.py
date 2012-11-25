@@ -1,4 +1,6 @@
-﻿import unittest
+﻿import sys
+
+import unittest
 import server_side
 
 class TestPlayerGet(unittest.TestCase):
@@ -16,3 +18,4 @@ class TestStorage(unittest.TestCase):
     
 if __name__ == '__main__':
     unittest.main()
+    
