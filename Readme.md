@@ -48,3 +48,8 @@ Online word puzzle game in Hebrew for 2 players.
 * Play turn
 * Get player
 * Get game
+
+TODO
+====
+* Use Apple specific "Web Clip" API to create an icon for the game and other stuff (See http://tinyurl.com/7384jyk)
+*
