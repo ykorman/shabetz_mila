@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>My Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="apple-touch-icon" href="apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-startup-image" href="apple-touch-startup-image-320x460.png" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head>
+
+<body> 
+
+<!-- Start of first page -->
+<div data-role="page" id="main">
+
+	<div data-role="header">
+		<h1>מסך ראשי</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<a href="#game" data-role="button">משחק חדש</a>
+		<a href="#main" data-role="button">משחקים קיימים</a>
+		<a href="#main" data-role="button">משחקים גמורים</a>
+		<a href="#main" data-role="button">הגדרות</a>
+		<a href="#main" data-role="button">אודות</a>
+	</div><!-- /content -->
+
+	<div data-role="footer" dir="rtl">
+		<h4>כל הזכויות שמורות.</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+
+<!-- Start of second page -->
+<div data-role="page" id="game">
+
+	<div data-role="header">
+		<h1>Bar</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p>I'm the second in the source order so I'm hidden when the page loads. I'm just shown if a link that references my id is beeing clicked.</p>		
+		<p><a href="#main">Back to foo</a></p>	
+		<table data-role="table" id="my-table" data-mode="reflow">
+		  <tbody>
+			<tr>
+			  <td><a href="#game" data-role="button">א</a></td>
+			  <td><a href="#game" data-role="button">ש</a></td>
+			  <td><a href="#game" data-role="button">ג</a></td>
+			  <td><a href="#game" data-role="button">ב</a></td>
+        <td><a href="#game" data-role="button">ב</a></td>
+			</tr>
+      <tr>
+			  <td><a href="#game" data-role="button">א</a></td>
+			  <td><a href="#game" data-role="button">ש</a></td>
+			  <td><a href="#game" data-role="button">ג</a></td>
+			  <td><a href="#game" data-role="button">ב</a></td>
+        <td><a href="#game" data-role="button">ב</a></td>
+			</tr>
+      <tr>
+			  <td><a href="#game" data-role="button">א</a></td>
+			  <td><a href="#game" data-role="button">ש</a></td>
+			  <td><a href="#game" data-role="button">ג</a></td>
+			  <td><a href="#game" data-role="button">ב</a></td>
+        <td><a href="#game" data-role="button">ב</a></td>
+			</tr>
+      <tr>
+			  <td><a href="#game" data-role="button">א</a></td>
+			  <td><a href="#game" data-role="button">ש</a></td>
+			  <td><a href="#game" data-role="button">ג</a></td>
+			  <td><a href="#game" data-role="button">ב</a></td>
+        <td><a href="#game" data-role="button">ב</a></td>
+			</tr>
+      <tr>
+			  <td><a href="#game" data-role="button">א</a></td>
+			  <td><a href="#game" data-role="button">ש</a></td>
+			  <td><a href="#game" data-role="button">ג</a></td>
+			  <td><a href="#game" data-role="button">ב</a></td>
+        <td><a href="#game" data-role="button">ב</a></td>
+			</tr>
+			</tbody>
+		</table>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+</body>
+</html>
