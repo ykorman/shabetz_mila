@@ -24,6 +24,32 @@ class Storage:
     def get_name(self):
         return self.name
 
+class GameEngine:
+    def __init__(self, name=":memory:"):
+        self.name = name
+        self.db = sqlite3.connect(self.name)
+        self.cursor = self.db.cursor()
+        e = self.cursor.execute
+        e('CREATE DATABASE game;');
+        e('USE game;');
+        e("""CREATE TABLE players (
+            id int NOT NULL AUTO_INCREMENT,
+            name varchar(30) NOT NULL,
+            PRIMARY_KEY(id)
+            );""")
+        
+        
+    def __del__(self):
+        self.db.close()
+        
+    def getName(self):
+        return self.name
+        
+    def addPlayer(self, name):
+        if (name == ""):
+            return False;
+        
+        return True;
 
 def print_hebrew_letters():
     import unicodedata as ud
@@ -31,6 +57,15 @@ def print_hebrew_letters():
     alphabet_length = 27
     for i in range(alphabet_length):
         print ud.name(unichr(alef+i))
+
+SCHEMA = """
+CREATE DATABASE shabetz_mila;
+USE shabetz_mila;
+CREATE TABLE players (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    
+        
 """        
 א       ב       ג       ד       ה       ו
 Alef    Bet     Gimel   Dalet   He      Vav

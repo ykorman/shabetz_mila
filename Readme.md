@@ -23,6 +23,13 @@ Online word puzzle game in Hebrew for 2 players.
 	* Submit Word
 	* Show played words
 	* Reset matrix
+	
+## New Game Screen
+* Select opponent from:
+	1. List of recent opponents
+	2. Enter opponent name
+	3. Random opponent
+* Start game
 
 # Database
 ----------
@@ -63,4 +70,7 @@ IDEAS
 		for c in range(l):
 			letter_list.append(MAX_OCC - letters[l])
 	Then we get random values from the letter_list.
-* If we decide not to use "final" letters, then their occurrence should be MAX_OCC. 
+* If we decide not to use "final" letters, then their occurrence should be MAX_OCC.
+* I need a database schema. It needs to have a table for configurations and hold a row for version of the schema.
+* The version row should always be written last so that if the db transaction fails it will be easy to recognize.
+* When opening the database file I need to check for the version.
