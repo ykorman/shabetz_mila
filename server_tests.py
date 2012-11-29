@@ -1,37 +1,65 @@
 ﻿import sys
 import unittest
 
-import server_side
+import server
 
-class TestPlayerGet(unittest.TestCase):
-    def testSimplePlayerGet(self):
-        p = server_side.get_player("player_name")
-        self.assertEqual("player_name", p.name)
-        p1 = server_side.get_player("player2")
-        self.assertEqual("player2", p1.name)
-        self.assertEqual("player_name", p.name)
+class TestPlayer(unittest.TestCase):
+    def testPlayerConstructor(self):
+        p = server.Player("aaa", "bbb", "ccc")
+        self.assertEqual(p.name, "aaa")
+        self.assertEqual(p.password, "bbb")
+        self.assertEqual(p.email, "ccc")
         
-class TestStorage(unittest.TestCase):
-    def testStorageOpen(self):
-        storage = server_side.open_storage("storage_name")
-        self.assertEqual(storage.get_name(), "storage_name")
-        
-class TestGameEngine(unittest.TestCase):
+class TestPlayerList(unittest.TestCase):
     def setUp(self):
-        self.ge = server_side.GameEngine()
+        self.pl = server.PlayerList()
     
-    def testAddPlayer(self):
-        result = self.ge.addPlayer("Avi")
-        self.assertEqual(result, True)
-    
-    def testCheckPlayerExists(self):
-        self.testAddPlayer()
-        result = self.ge.addPlayer("Avi")
-        self.assertEqual(result, False)
+    def testPlayerListConstructor(self):
+        self.assertNotEqual(self.pl, None)
         
-    def tearDown(self):
-        del self.ge
+    def testPlayerListAddPlayer(self):
+        p = server.Player("aaa", "bbb", "ccc")
+        self.pl.addPlayer(p)
+        self.assertEqual(self.pl.list[0].name, "aaa")
     
+    def testPlayerListGetPlayer(self):
+        p = server.Player("aaa", "bbb", "ccc")
+        self.pl.addPlayer(p)
+        pf = self.pl.findPlayer("aaa")
+        pn = self.pl.findPlayer("bbb")
+        self.assertEqual(pf.name, "aaa")
+        self.assertEqual(pn, None)
+        
+class TestGame(unittest.TestCase):
+    def testGameConstructor(self):
+        p1 = server.Player("aaa", "bbb", "ccc")
+        p2 = server.Player("zzz", "yyy", "xxx")
+        g = server.Game(p1,p2)
+        self.assertNotEqual(g.id, 0)
+        self.assertEqual(len(g.letterList), 25)
+        
+class TestGameList(unittest.TestCase):
+    def TestGameListGetGame(self):
+        p1 = server.Player("aaa", "bbb", "ccc")
+        p2 = server.Player("zzz", "yyy", "xxx")
+        g = server.Game(p1,p2)
+        gl = server.GameList()
+        gl.addGame(g)
+        self.assertEqual(gl.getGame(g.id), g.id)
+    
+class TestGameStore(unittest.TestCase):
+    def testGameStoreLoadNSave(self):
+        gs = server.GameStore()
+        p1 = server.Player("aaa", "bbb", "ccc")
+        p2 = server.Player("zzz", "yyy", "xxx")
+        g = server.Game(p1,p2)
+        gs.players.addPlayer(p1)
+        gs.players.addPlayer(p2)
+        gs.games.addGame(g)
+        gs.save("test_db.dat")
+        gs1 = server.loadGameStore("test_db.dat")
+        self.assertNotEqual(gs1.games.getGame(g.id),None)
+        
 if __name__ == '__main__':
     unittest.main()
     
