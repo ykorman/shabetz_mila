@@ -64,6 +64,15 @@ USE shabetz_mila;
 CREATE TABLE players (
     id INTEGER PRIMARY KEY,
     name TEXT,
+    password TEXT,);
+
+CREATE TABLE games (
+    id INTEGER PRIMARY KEY,
+    playera_id INTEGER,
+    playerb_id INTEGER,
+    last_round TEXT,
+    letter_list TEXT,
+    playera_letter_indexes
     
         
 """        
