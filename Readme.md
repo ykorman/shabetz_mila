@@ -74,3 +74,4 @@ IDEAS
 * I need a database schema. It needs to have a table for configurations and hold a row for version of the schema.
 * The version row should always be written last so that if the db transaction fails it will be easy to recognize.
 * When opening the database file I need to check for the version.
+* The bottle microframework has a sqlite plugin, I should use it
