@@ -1,9 +1,24 @@
-from bottle import route, request, run, get, template
+from bottle import route, request, run, get, template, static_file, post
+
+@route('/shabetz_mila')
+def main_html():
+    return static_file("ui.html", root="./")
+
+@route('/app.js')
+def app_js():
+    return static_file("app.js", root="./")
+    
+@post('/shabetz_mila/login')
+def login_submit():
+    name     = request.forms.get('username')
+    password = request.forms.get('password')
+    return "username=%s password=%s" % (name, password)
+
+# samples
 
 @route('/hello/<name>')
 def index(name='World'):
     return template('<b>Hello {{name}}</b>!', name=name)
-
     
 @route('/form')
 def construct_form():

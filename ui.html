@@ -14,9 +14,64 @@
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 </head>
 
-<body> 
+<body>
 
-<!-- Start of first page -->
+<div data-role="page" id="login">
+
+  <div data-role="header">
+		<h1>ברוכים הבאים לשבץ מילה</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+    <form action="login" method="post">
+      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+        <label for="username">שם משתמש</label>
+        <input type="text" name="username" id="username" value="" placeholder="שם משתמש"/>
+      </div>
+      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+        <label for="password">סיסמה</label>
+        <input type="password" name="password" id="password" value="" placeholder="סיסמה"/>
+      </div>
+      <input data-role="button" id="loginBtn" type="submit" value="התחבר/י" />
+      <a href="#register" data-role="button">משתמש חדש</a>
+    </form>
+	</div><!-- /content -->
+
+	<div data-role="footer" dir="rtl">
+		<h4>כל הזכויות שמורות.</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+<div data-role="page" id="register">
+
+  <div data-role="header">
+		<h1>הרשמה</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+    <form action="register" method="post">
+      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+        <label for="username">שם משתמש</label>
+        <input type="text" name="regUsername" id="regUsername" value="" placeholder="שם משתמש"/>
+      </div>
+      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+        <label for="regPassword">סיסמה</label>
+        <input type="password" name="regPassword" id="regPassword" value="" placeholder="סיסמה"/>
+      </div>
+      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+        <label for="regEmail">אימייל</label>
+        <input type="text" name="regEmail" id="regEmail" value="" placeholder="אימייל"/>
+      </div>
+      <input data-role="button" id="registerBtn" type="submit" value="הירשם/י" />
+      <a href="#login" data-role="button">חזור חזרה</a>
+    </form>
+	</div><!-- /content -->
+
+	<div data-role="footer" dir="rtl">
+		<h4>כל הזכויות שמורות.</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
 <div data-role="page" id="main">
 
 	<div data-role="header">
@@ -36,8 +91,6 @@
 	</div><!-- /footer -->
 </div><!-- /page -->
 
-
-<!-- Start of second page -->
 <div data-role="page" id="game">
 
 	<div data-role="header">
