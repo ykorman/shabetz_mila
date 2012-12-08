@@ -32,7 +32,11 @@
         <label for="password">סיסמה</label>
         <input type="password" name="password" id="password" value="" placeholder="סיסמה"/>
       </div>
-      <input data-role="button" id="loginBtn" type="submit" value="התחבר/י" />
+      <div data-role="popup" id="loginError">
+        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-left">סגור</a>
+        <p>שם משתמש או סיסמה שגויים. נסו שנית<p>
+      </div>
+      <a id="loginBtn" data-role="button">התחברות</a>
       <a href="#register" data-role="button">משתמש חדש</a>
     </form>
 	</div><!-- /content -->

@@ -7,13 +7,18 @@ def main_html():
 @route('/app.js')
 def app_js():
     return static_file("app.js", root="./")
-    
+   
 @post('/shabetz_mila/login')
 def login_submit():
     name     = request.forms.get('username')
     password = request.forms.get('password')
-    return "username=%s password=%s" % (name, password)
+    if (name == "abc"):
+        return "success"
+    else:
+        return "failure"
+    #return "username=%s password=%s" % (name, password)
 
+    
 # samples
 
 @route('/hello/<name>')
