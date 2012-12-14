@@ -5,10 +5,10 @@
 		$.post("shabetz_mila/login",
 			{ username: username, password: password },
 			function(response) {
-			//alert("Data loaded: " + data); 
-				if (response == "success")
+				if (response == "success") {
 					$.mobile.changePage($("#main"));
-				else
+					// alert($.cookie("username"));
+				} else
 					$("#loginError").popup("open");					
 			});
 	});

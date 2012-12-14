@@ -1,22 +1,30 @@
-from bottle import route, request, run, get, template, static_file, post
+from bottle import route, request, run, get, template, static_file, post, response
+
+import server
+
+gameStore = server.loadGameStore("sample_db.dat")
 
 @route('/shabetz_mila')
+@route('/shabetz_mila/index.html')
 def main_html():
     return static_file("ui.html", root="./")
 
-@route('/app.js')
-def app_js():
-    return static_file("app.js", root="./")
+@route('/<script>.js')
+def app_js(script):
+    if script in ("app", "jquery.cookie"):
+        return static_file(script + ".js", root="./")
+    else:
+        abort(404, "No such script")
    
 @post('/shabetz_mila/login')
 def login_submit():
     name     = request.forms.get('username')
     password = request.forms.get('password')
     if (name == "abc"):
+        response.set_cookie("username", name)
         return "success"
     else:
         return "failure"
-    #return "username=%s password=%s" % (name, password)
 
     
 # samples
@@ -68,4 +76,4 @@ def ajaxtest():
     return "You didn't type anything."
 
 
-run(host='localhost', port=8181)
+run(host='0.0.0.0', port=8181)
