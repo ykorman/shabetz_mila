@@ -1,5 +1,6 @@
 ﻿import sys
 import unittest
+import json
 
 import server
 
@@ -34,7 +35,7 @@ class TestGame(unittest.TestCase):
     def testGameConstructor(self):
         p1 = server.Player("aaa", "bbb", "ccc")
         p2 = server.Player("zzz", "yyy", "xxx")
-        g = server.Game(p1,p2)
+        g = server.Game(p1.name,p2.name)
         self.assertNotEqual(g.id, 0)
         self.assertEqual(len(g.letterList), 25)
         
@@ -42,7 +43,7 @@ class TestGameList(unittest.TestCase):
     def TestGameListGetGame(self):
         p1 = server.Player("aaa", "bbb", "ccc")
         p2 = server.Player("zzz", "yyy", "xxx")
-        g = server.Game(p1,p2)
+        g = server.Game(p1.name,p2.name)
         gl = server.GameList()
         gl.addGame(g)
         self.assertEqual(gl.getGame(g.id), g.id)
@@ -52,13 +53,20 @@ class TestGameStore(unittest.TestCase):
         gs = server.GameStore()
         p1 = server.Player("aaa", "bbb", "ccc")
         p2 = server.Player("zzz", "yyy", "xxx")
-        g = server.Game(p1,p2)
+        g = server.Game(p1.name,p2.name)
         gs.players.addPlayer(p1)
         gs.players.addPlayer(p2)
         gs.games.addGame(g)
         gs.save("test_db.dat")
         gs1 = server.loadGameStore("test_db.dat")
         self.assertNotEqual(gs1.games.getGame(g.id),None)
+        
+class TestGameSerializeToJson(unittest.TestCase):
+    def testSerializeToJson(self):
+        p1 = server.Player("aaa", "bbb", "ccc")
+        p2 = server.Player("zzz", "yyy", "xxx")
+        g = server.Game(p1.name,p2.name)
+        #g.toJson()
         
 if __name__ == '__main__':
     unittest.main()

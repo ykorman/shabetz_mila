@@ -1,176 +1,167 @@
 ﻿<!DOCTYPE html> 
 <html> 
 <head> 
-	<title>My Page</title> 
+	<title>Shabetz Mila</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <link rel="apple-touch-icon" href="apple-touch-icon-57x57.png" />
-  <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
-  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png" />
-  <link rel="apple-touch-startup-image" href="apple-touch-startup-image-320x460.png" />
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+<!-- 
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon" href="apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-startup-image" href="apple-touch-startup-image-320x460.png" />
+-->
+	<!-- KnockoutJS-->
+	<script src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+	<script src="knockout.mapping-2.4.1.js"></script>
+  	<!-- Jquery & Jquery Mobile -->
+  	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-  <script src="jquery.cookie.js"></script>
-	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+ 	<script src="jquery.cookie.js"></script>
+ 	 <!-- Bootstrap -->
+	<link href="bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 
 <body>
 
-<div data-role="page" id="login">
+	<div data-role="page" id="login">
 
-  <div data-role="header">
-		<h1>ברוכים הבאים לשבץ מילה</h1>
-	</div><!-- /header -->
+		<div data-role="header">
+			<h1>ברוכים הבאים לשבץ מילה</h1>
+		</div><!-- /header -->
 
-	<div data-role="content">
-    <form action="login" method="post">
-      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
-        <label for="username">שם משתמש</label>
-        <input type="text" name="username" id="username" value="" placeholder="שם משתמש"/>
-      </div>
-      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
-        <label for="password">סיסמה</label>
-        <input type="password" name="password" id="password" value="" placeholder="סיסמה"/>
-      </div>
-      <div data-role="popup" id="loginError">
-        <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-left">סגור</a>
-        <p>שם משתמש או סיסמה שגויים. נסו שנית<p>
-      </div>
-      <a id="loginBtn" data-role="button">התחברות</a>
-      <a href="#register" data-role="button">משתמש חדש</a>
-    </form>
-	</div><!-- /content -->
+		<div data-role="content">
+			<form action="login" method="post">
+				<div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+					<label for="username">שם משתמש</label>
+					<input type="text" name="username" id="username" value="" placeholder="שם משתמש"/>
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+					<label for="password">סיסמה</label>
+					<input type="password" name="password" id="password" value="" placeholder="סיסמה"/>
+				</div>
+				<div data-role="popup" id="loginError">
+					<a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-left">סגור</a>
+					<p>שם משתמש או סיסמה שגויים. נסו שנית</p>
+				</div>
+				<a id="loginBtn" data-role="button">התחברות</a>
+				<a href="#register" data-role="button">משתמש חדש</a>
+			</form>
+		</div><!-- /content -->
 
-	<div data-role="footer" dir="rtl">
-		<h4>כל הזכויות שמורות.</h4>
-	</div><!-- /footer -->
-</div><!-- /page -->
+		<div data-role="footer" dir="rtl">
+			<h4>כל הזכויות שמורות.</h4>
+		</div><!-- /footer -->
+	</div><!-- /page -->
 
-<div data-role="page" id="register">
+	<div data-role="page" id="register">
 
-  <div data-role="header">
-		<h1>הרשמה</h1>
-	</div><!-- /header -->
+		<div data-role="header">
+			<h1>הרשמה</h1>
+		</div><!-- /header -->
 
-	<div data-role="content">
-    <form action="register" method="post">
-      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
-        <label for="username">שם משתמש</label>
-        <input type="text" name="regUsername" id="regUsername" value="" placeholder="שם משתמש"/>
-      </div>
-      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
-        <label for="regPassword">סיסמה</label>
-        <input type="password" name="regPassword" id="regPassword" value="" placeholder="סיסמה"/>
-      </div>
-      <div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
-        <label for="regEmail">אימייל</label>
-        <input type="text" name="regEmail" id="regEmail" value="" placeholder="אימייל"/>
-      </div>
-      <input data-role="button" id="registerBtn" type="submit" value="הירשם/י" />
-      <a href="#login" data-role="button">חזור חזרה</a>
-    </form>
-	</div><!-- /content -->
+		<div data-role="content">
+			<form action="register" method="post">
+				<div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+					<label for="username">שם משתמש</label>
+					<input type="text" name="regUsername" id="regUsername" value="" placeholder="שם משתמש"/>
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+					<label for="regPassword">סיסמה</label>
+					<input type="password" name="regPassword" id="regPassword" value="" placeholder="סיסמה"/>
+				</div>
+				<div data-role="fieldcontain" class="ui-hide-label" dir="rtl">
+					<label for="regEmail">אימייל</label>
+					<input type="text" name="regEmail" id="regEmail" value="" placeholder="אימייל"/>
+				</div>
+				<input data-role="button" id="registerBtn" type="submit" value="הירשם/י" />
+				<a href="#login" data-role="button">חזור חזרה</a>
+			</form>
+		</div><!-- /content -->
 
-	<div data-role="footer" dir="rtl">
-		<h4>כל הזכויות שמורות.</h4>
-	</div><!-- /footer -->
-</div><!-- /page -->
+		<div data-role="footer" dir="rtl">
+			<h4>כל הזכויות שמורות.</h4>
+		</div><!-- /footer -->
+	</div><!-- /page -->
 
-<div data-role="page" id="main">
+	<div data-role="page" id="main">
 
-	<div data-role="header">
-		<h1>מסך ראשי</h1>
-	</div><!-- /header -->
+		<div data-role="header">
+			<h1>מסך ראשי</h1>
+		</div><!-- /header -->
 
-	<div data-role="content">
-		<a href="#game" data-role="button">משחק חדש</a>
-		<a href="#main" data-role="button">משחקים קיימים</a>
-		<a href="#main" data-role="button">משחקים גמורים</a>
-		<a href="#main" data-role="button">הגדרות</a>
-		<a href="#main" data-role="button">אודות</a>
-	</div><!-- /content -->
+		<div data-role="content">
+			<a href="#newGame" data-role="button">משחק חדש</a>
+			<a href="#main" data-role="button">משחקים קיימים</a>
+			<a href="#main" data-role="button">משחקים גמורים</a>
+			<a href="#main" data-role="button">הגדרות</a>
+			<a href="#main" data-role="button">אודות</a>
+		</div><!-- /content -->
 
-	<div data-role="footer" dir="rtl">
-		<h4>כל הזכויות שמורות.</h4>
-	</div><!-- /footer -->
-</div><!-- /page -->
+		<div data-role="footer" dir="rtl">
+			<h4>כל הזכויות שמורות.</h4>
+		</div><!-- /footer -->
+	</div><!-- /page -->
 
-<div data-role="page" id="game">
+	<div data-role="page" id="newGame">
 
-	<div data-role="header">
-    <table data-role="table" id="my-table" data-mode="reflow" style="margin:0 auto;" dir="rtl">
-      <tr>
-			  <td><a id="" data-role="button">7</a></td>
-			  <td><a id="" data-role="button">שחקן א</a></td>
-			  <td><a id="" data-role="button">נגד</a></td>
-			  <td><a id="" data-role="button">שחקן ב</a></td>
-        <td><a id="" data-role="button">13</a></td>
-			</tr>
-    </table>
-	</div><!-- /header -->
+		<div data-role="header">
+			<h1>משחק חדש</h1>
+		</div><!-- /header -->
 
-	<div data-role="content">		
-    <table data-role="table" id="my-table" data-mode="reflow" style="margin:0 auto;" dir="rtl">
-      <tr>
-			  <td><a id="" data-mini="true" data-role="button">א</a></td>
-			  <td><a id="" data-mini="true" data-role="button">ב</a></td>
-			  <td><a id="" data-mini="true" data-role="button">ג</a></td>
-			  <td><a id="" data-mini="true" data-role="button">ד</a></td>
-        <td><a id="" data-mini="true" data-role="button">ה</a></td>
-        <td><a id="" data-mini="true" data-role="button">א</a></td>
-			  <td><a id="" data-mini="true" data-role="button">ב</a></td>
-			  <td><a id="" data-mini="true" data-role="button">ג</a></td>
-			  <td><a id="" data-mini="true" data-role="button">ד</a></td>
-        <td><a id="" data-mini="true" data-role="button">ה</a></td>
-			</tr>
-    </table>
-		<table data-role="table" id="my-table" data-mode="reflow" style="margin:0 auto;" dir="rtl">
-		  <tbody>
-			<tr>
-			  <td><a id="c01" data-mini="true" data-role="button">א</a></td>
-			  <td><a id="c02" data-mini="true" data-role="button">ש</a></td>
-			  <td><a id="c03" data-mini="true" data-role="button">ג</a></td>
-			  <td><a id="c04" data-mini="true" data-role="button">ב</a></td>
-        <td><a id="c05" data-mini="true" data-role="button">ב</a></td>
-			</tr>    
-      <tr>     
-			  <td><a id="c06" data-mini="true" data-role="button">א</a></td>
-			  <td><a id="c07" data-mini="true" data-role="button">ש</a></td>
-			  <td><a id="c08" data-mini="true" data-role="button">ג</a></td>
-			  <td><a id="c09" data-mini="true" data-role="button">ב</a></td>
-        <td><a id="c10" data-mini="true" data-role="button">ב</a></td>
-			</tr>        
-      <tr>     
-			  <td><a id="c11" data-mini="true" data-role="button">א</a></td>
-			  <td><a id="c12" data-mini="true" data-role="button">ש</a></td>
-			  <td><a id="c13" data-mini="true" data-role="button">ג</a></td>
-			  <td><a id="c14" data-mini="true" data-role="button">ב</a></td>
-        <td><a id="c15" data-mini="true" data-role="button">ב</a></td>
-			</tr>    
-      <tr>     
-			  <td><a id="c16" data-mini="true" data-role="button">א</a></td>
-			  <td><a id="c17" data-mini="true" data-role="button">ש</a></td>
-			  <td><a id="c18" data-mini="true" data-role="button">ג</a></td>
-			  <td><a id="c19" data-mini="true" data-role="button">ב</a></td>
-        <td><a id="c20" data-mini="true" data-role="button">ב</a></td>
-			</tr>    
-      <tr>     
-			  <td><a id="c21" data-mini="true" data-role="button">א</a></td>
-			  <td><a id="c22" data-mini="true" data-role="button">ש</a></td>
-			  <td><a id="c23" data-mini="true" data-role="button">ג</a></td>
-			  <td><a id="c24" data-mini="true" data-role="button">ב</a></td>
-        <td><a id="c25" data-mini="true" data-role="button">ב</a></td>
-			</tr>
-			</tbody>
-		</table>
-	</div><!-- /content -->
+		<div data-role="content" dir="rtl">
+			<h2>הכנס/י שם מתחרה</h2>
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup" class="ui-hide-label">
+					<label for="rivalName">שם מתחרה</label>
+					<input type="text" name="rivalName" id="rivalName" value="" placeholder="שם משתמש"/>
+				</fieldset>
+			</div>
+			<a data-role="button" id="startGame">שחק</a>
+			<h2>או שחק/י נגד מתחרה אקראי</h2>
+			<a data-role="button" id="startRandomGame">שחק באקראי</a>
+		</div><!-- /content -->
 
-	<div data-role="footer" dir="rtl">
-		<a href="dialog.html" data-rel="dialog" data-transition="slidedown">הצג שאלה</a>
-    <a href="#main" data-role="button">חזרה לתפריט</a>
-	</div><!-- /footer -->
-</div><!-- /page -->
-<script src="app.js"></script>
+		<div data-role="footer" dir="rtl">
+			<a href="#main" data-role="button">חזרה לתפריט</a>
+		</div><!-- /footer -->
+
+		<div data-role="popup" id="startGameError">
+			<a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-left">סגור</a>
+			<p id="startGameErrorMsg">שגיאה</p>
+		</div>
+
+	</div><!-- /page -->
+
+	<div data-role="page" id="game">
+
+		<div data-role="header">
+			<h1>מסך ראשי</h1>
+		</div><!-- /header -->
+
+		<div data-role="content" dir="rtl">		
+			<div data-enhance="false">
+				<div id="selected">
+					<div data-bind="foreach: selected">
+						<span class="btn" data-bind="text: letter, click: $root.select"></span>
+					</div>
+				</div>
+				<br />
+				<div data-bind="foreach: cells">
+					<span class="btn" data-bind="text: letter, click: $root.select, style: { color: selected() ? 'red' : 'black' }"></span>
+					<!-- ko if: (($index()+1) % 5 == 0) -->
+					<br />
+					<!-- /ko -->
+				</div>
+			</div>
+		</div><!-- /content -->
+
+		<div data-role="footer" dir="rtl">
+			<a href="#main" data-role="button">חזרה לתפריט</a>
+		</div><!-- /footer -->
+	</div><!-- /page -->
+
+	<script src="app.js"></script>
 </body>
 </html>

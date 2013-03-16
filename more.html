@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="more.css" />
+  <script src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+  
+  <title>More KnockoutJS Test Page</title>
+</head>
+
+<body>
+  <div id="selected">
+    <div data-bind="foreach: selected">
+      <span data-bind="text: letter, click: $root.select"></span>
+    </div>
+  </div>
+  <br />
+  <div data-bind="foreach: cells">
+    <span data-bind="text: letter, click: $root.select, style: { color: selected() ? 'red' : 'black' }"></span>
+    <!-- ko if: (($index()+1) % 5 == 0) -->
+      <br />
+    <!-- /ko -->
+  </div>
+
+  <pre data-bind="text: ko.toJSON($root, null, 2)"></pre>
+
+  <script src='more.js'></script>
+</body>
+</html>

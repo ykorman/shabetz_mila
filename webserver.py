@@ -1,3 +1,4 @@
+﻿# -*- coding: utf-8 -*-
 from bottle import route, request, run, get, template, static_file, post, response
 
 import server
@@ -11,69 +12,40 @@ def main_html():
 
 @route('/<script>.js')
 def app_js(script):
-    if script in ("app", "jquery.cookie"):
+    if script in ("app", "jquery.cookie", "knockout.mapping-2.4.1"):
         return static_file(script + ".js", root="./")
     else:
         abort(404, "No such script")
+
+@route('/<stylesheet>.css')
+def app_css(stylesheet):
+    if stylesheet in ("bootstrap.min"):
+        return static_file(stylesheet + ".css", root="./")
+    else:
+        abort(404, "no such stylesheet")
    
 @post('/shabetz_mila/login')
-def login_submit():
+def login():
     name     = request.forms.get('username')
     password = request.forms.get('password')
-    if (name == "abc"):
-        response.set_cookie("username", name)
-        return "success"
-    else:
+    player = gameStore.players.findPlayer(name)
+    if (player is None) or (player.password != password):
         return "failure"
+    else:
+        response.set_cookie("username", player.name)
+        return "success"
 
-    
-# samples
-
-@route('/hello/<name>')
-def index(name='World'):
-    return template('<b>Hello {{name}}</b>!', name=name)
-    
-@route('/form')
-def construct_form():
-    return '''
-
-<!DOCTYPE html>
-<html>
-<head>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('form').submit(function(e) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/ajax',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        $('#ajaxP').html(response);
-                    }
-                });
-                e.preventDefault();
-            });
-        });
-    </script>
-</head>
-<body>
-    <form method="POST" action="/ajax">
-        <input id="ajaxTextbox" name="text" type"text" />
-        <input id="ajaxButton" type="submit" value="Submit" />
-    </form>
-    <p id="ajaxP">Nothing to see here.</p>
-</body>
-</html>
-
-    '''
-
-@route('/ajax', method='POST')
-def ajaxtest():
-    theText = request.forms.text
-    if theText:
-        return theText
-    return "You didn't type anything."
-
+@post('/shabetz_mila/start_game')
+def start_game():
+    playerName = request.forms.get('player_name')
+    rivalName = request.forms.get('rival_name')
+    player = gameStore.players.findPlayer(playerName)
+    rival = gameStore.players.findPlayer(rivalName)
+    if (player is not None) and (rival is not None):
+        game = server.Game(player.name, rival.name)
+        gameStore.games.addGame(game)
+        return game.toJson()
+    else:
+        return "שגיאה כללית"
 
 run(host='0.0.0.0', port=8181)

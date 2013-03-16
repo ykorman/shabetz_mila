@@ -1,5 +1,7 @@
 import random
 import cPickle
+import json
+#import unicodedata as ud
 
 class Player:
     def __init__(self, name, password, email):
@@ -30,17 +32,24 @@ class Game:
         self.bWords = []
         
     def playWord(self, player, word):
-        if (self.aPlayer.name == player.name):
+        if (self.aPlayer == player):
             self.aWords.append(word)
-        elif (self.bPlayer.name == player.name):
+        elif (self.bPlayer == player):
             self.bWords.append(word)
             
     def genLetterList(self):
         l = []
-        for i in range(25):
-            l.append(random.randint(0,27))
+        alphabet_length = 27
+        alef = 0x05D0
+        list_size = 25
+        for i in range(list_size):
+            index = random.randint(0, alphabet_length + 1) - 1;
+            l.append(unichr(alef + index));
         return l
-    
+        
+    def toJson(self):
+        return json.dumps(self, default=lambda o: o.__dict__)    
+        
 class GameList:
     def __init__(self):
         self.list = []

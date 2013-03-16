@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  <script src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js'></script>
+  
+  <title>Shabetz Mila KnockoutJS Test Page</title>
+</head>
+
+<body>
+  <div data-role="page">
+    <div data-role="contents">
+      <p>Up:</p>
+      <div data-bind="foreach: upperList">
+        <button data-bind="text: value, click: $root.move"></button>
+      </div>
+      <p>Down:</p>
+      <div data-bind="foreach: lowerList">
+        <button data-bind="text: value, click: $root.move"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src='ko_test.js'></script>
+</body>
+</html>
