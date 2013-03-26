@@ -142,6 +142,12 @@
 
 		<div data-role="content" dir="rtl">		
 			<div data-enhance="false">
+				<div id="score">
+					<span data-bind="text: aPlayer.name"></span>
+					<span data-bind="text: aPlayer.score"></span>
+					<span data-bind="text: bPlayer.name"></span>
+					<span data-bind="text: bPlayer.score"></span>
+				</div>
 				<div id="selected">
 					<div data-bind="foreach: selected">
 						<span class="btn" data-bind="text: letter, click: $root.select"></span>
@@ -158,6 +164,7 @@
 		</div><!-- /content -->
 
 		<div data-role="footer" dir="rtl">
+			<a id="submitWord" href="#" data-role="button">שלח מילה</a>
 			<a href="#main" data-role="button">חזרה לתפריט</a>
 		</div><!-- /footer -->
 	</div><!-- /page -->

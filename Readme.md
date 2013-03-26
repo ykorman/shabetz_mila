@@ -59,19 +59,25 @@ Online word puzzle game in Hebrew for 2 players.
 TODO
 ====
 * Use Apple specific "Web Clip" API to create an icon for the game and other stuff (See http://tinyurl.com/7384jyk)
-*
+* Fix getting 404 on favicon.ico
+* Split HTML to several files
+* Remove Bootstrap and make JQM update the visuals when KO changes
+* Remove cookies and store information in KO objects
 
 IDEAS
 =====
 * Build a list of letter occurrences based on Scrabble values (a list of 27 integers).
-* To generate random letters based on occurrence, we generate a list of letters based on the following algorithm:
-	MAX_OCC = 10
-	for l in occ_list:
-		for c in range(l):
-			letter_list.append(MAX_OCC - letters[l])
-	Then we get random values from the letter_list.
-* If we decide not to use "final" letters, then their occurrence should be MAX_OCC.
-* I need a database schema. It needs to have a table for configurations and hold a row for version of the schema.
-* The version row should always be written last so that if the db transaction fails it will be easy to recognize.
-* When opening the database file I need to check for the version.
-* The bottle microframework has a sqlite plugin, I should use it
+	* To generate random letters based on occurrence, we generate a list of letters based on the following algorithm:
+		MAX_OCC = 10
+		for l in occ_list:
+			for c in range(l):
+				letter_list.append(MAX_OCC - letters[l])
+		Then we get random values from the letter_list.
+	* If we decide not to use "final" letters, then their occurrence should be MAX_OCC.
+* Move from Pickle store to a database (sqlite):
+	* I need a database schema. It needs to have a table for configurations and hold a row for version of the schema.
+	* The version row should always be written last so that if the db transaction fails it will be easy to recognize.
+	* When opening the database file I need to check for the version.
+	* The bottle microframework has a sqlite plugin, I should use it
+* Use an online service for spellchecking, and if doesn't exist, use emscripten to convert hspell to a JS library.
+* Allow users to add words to the dictionary

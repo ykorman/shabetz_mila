@@ -1,7 +1,7 @@
 import random
 import cPickle
 import json
-#import unicodedata as ud
+import unicodedata as ud
 
 class Player:
     def __init__(self, name, password, email):
@@ -41,10 +41,23 @@ class Game:
         l = []
         alphabet_length = 27
         alef = 0x05D0
+        good_letters = [0,1,2,3,4,5,6,7,8,9,
+                        #10,
+                        11,12,
+                        #13,
+                        14,
+                        #15,
+                        16,17,18,
+                        #19,
+                        20,
+                        #21,
+                        22,23,24,25,26]
         list_size = 25
         for i in range(list_size):
-            index = random.randint(0, alphabet_length + 1) - 1;
-            l.append(unichr(alef + index));
+            index = random.randint(0, len(good_letters) - 1)
+            letter = unichr(alef + good_letters[index])
+            l.append(letter)
+            # print str(i) + ":" + str(index) + "=" + ud.name(letter)
         return l
         
     def toJson(self):

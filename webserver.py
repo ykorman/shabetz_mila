@@ -48,4 +48,12 @@ def start_game():
     else:
         return "שגיאה כללית"
 
+@post('/shabetz_mila/submit_word')
+def start_game():
+    playerName = request.forms.get('player_name')
+    rivalName = request.forms.get('rival_name')
+    word = request.forms.get('word')
+    
+    return "שגיאה כללית"
+
 run(host='0.0.0.0', port=8181)
