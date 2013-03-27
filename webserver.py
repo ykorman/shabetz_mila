@@ -1,6 +1,6 @@
 ﻿# -*- coding: utf-8 -*-
 from bottle import route, request, run, get, template, static_file, post, response
-
+import json
 import server
 
 gameStore = server.loadGameStore("sample_db.dat")
@@ -52,7 +52,9 @@ def start_game():
 def start_game():
     playerName = request.forms.get('player_name')
     rivalName = request.forms.get('rival_name')
-    word = request.forms.get('word')
+    word = json.loads(request.forms.get('word'))
+    for letter in word:
+        print letter
     
     return "שגיאה כללית"
 

@@ -30,10 +30,10 @@
 	$("#submitWord").click(function() {
 		var player_name = appViewModel.aPlayer.name();
 		var rival_name = appViewModel.bPlayer.name();
-		var word = appViewModel.selected();
+		var word = ko.mapping.toJS(appViewModel.selected);
 		console.log(word);
 		$.post("shabetz_mila/submit_word",
-			{ "player_name": player_name, "rival_name": rival_name, "word": word },
+			{ "player_name": player_name, "rival_name": rival_name, "word": JSON.stringify(word) },
 			function(response) {
 				
 			});
