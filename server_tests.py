@@ -37,7 +37,7 @@ class TestGame(unittest.TestCase):
         p2 = server.Player("zzz", "yyy", "xxx")
         g = server.Game(p1.name,p2.name)
         self.assertNotEqual(g.id, 0)
-        self.assertEqual(len(g.letterList), 25)
+        self.assertEqual(len(g.letters), 25)
         
 class TestGameList(unittest.TestCase):
     def TestGameListGetGame(self):
