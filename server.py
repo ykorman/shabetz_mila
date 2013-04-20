@@ -40,7 +40,7 @@ class Game:
         return word
 
     def checkWord(self, word):
-
+        pass
         
     def tryPlayTurn(self, player_id, letterList):
         # check if it's player_id's turn
