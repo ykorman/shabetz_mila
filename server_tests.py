@@ -3,6 +3,7 @@ import unittest
 import json
 
 import server
+import hspell
 
 class TestPlayer(unittest.TestCase):
     def testPlayerConstructor(self):
@@ -67,6 +68,15 @@ class TestGameSerializeToJson(unittest.TestCase):
         p2 = server.Player("zzz", "yyy", "xxx")
         g = server.Game(p1.name,p2.name)
         #g.toJson()
+
+class TestHspell(unittest.TestCase):
+    def testHspellInit(self):
+        h = hspell()
+
+    def testHspellWordCheck(self):
+        h = hspell()
+        self.assertEqual(h.checkWord(u'שלום'), True)
+        self.assertEqual(h.checkWord(u'לושם'), False)
         
 if __name__ == '__main__':
     unittest.main()

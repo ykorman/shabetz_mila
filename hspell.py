@@ -56,6 +56,9 @@ class Hspell:
 		# allocate integer for the check_word function (later used)
 		self.preflen = ctypes.c_int()
 
+	def __del__(self):
+		self.hspell_lib.hspell_uninit(self.dict_radix)
+
 	def check_word(self, word):
 		encoded_word = ctypes.c_char_p(word.encode("iso8859_8"))
 		res = self.hspell_lib.hspell_check_word(self.dict_radix, encoded_word, ctypes.byref(self.preflen))
