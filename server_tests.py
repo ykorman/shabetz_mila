@@ -71,10 +71,10 @@ class TestGameSerializeToJson(unittest.TestCase):
 
 class TestHspell(unittest.TestCase):
     def testHspellInit(self):
-        h = hspell()
+        h = hspell.hspell()
 
     def testHspellWordCheck(self):
-        h = hspell()
+        h = hspell.hspell()
         self.assertEqual(h.checkWord(u'שלום'), True)
         self.assertEqual(h.checkWord(u'לושם'), False)
         
