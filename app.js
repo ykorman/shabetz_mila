@@ -28,12 +28,13 @@
 	});
 
 	$("#submitWord").click(function() {
+        var id = appViewModel.gameId;
 		var player_name = appViewModel.aPlayer.name();
 		var rival_name = appViewModel.bPlayer.name();
 		var word = ko.mapping.toJS(appViewModel.selected);
 		console.log(word);
 		$.post("shabetz_mila/submit_word",
-			{ "player_name": player_name, "rival_name": rival_name, "word": JSON.stringify(word) },
+			{ id: id, "player_name": player_name, "rival_name": rival_name, "word": JSON.stringify(word) },
 			function(response) {
 				
 			});
@@ -80,13 +81,14 @@
 
 		self.updateFromServer = function(data) {
 			var game = jQuery.parseJSON(data);
-			self.aPlayer.name(game.aPlayer);
-			self.aPlayer.score(game.aWords.length);
-			self.bPlayer.name(game.bPlayer);
-			self.bPlayer.score(game.bWords.length);
+            self.gameId = game.id
+			self.aPlayer.name(game.player_id);
+			self.aPlayer.score(game.playerLetters.length);
+			self.bPlayer.name(game.rival_id);
+			self.bPlayer.score(game.rivalLetters.length);
 			var i;
 			for (i=0; i < 25; i++) {
-				self.cells()[i].letter(game.letterList[i]);
+				self.cells()[i].letter(game.letters[i]);
 			}
 		};
 

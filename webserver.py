@@ -49,13 +49,25 @@ def start_game():
         return "שגיאה כללית"
 
 @post('/shabetz_mila/submit_word')
-def start_game():
+def submit_word():
+    gameId = int(request.forms.get('id'))
     playerName = request.forms.get('player_name')
     rivalName = request.forms.get('rival_name')
     word = json.loads(request.forms.get('word'))
+    letterList = []
     for letter in word:
-        print letter
-    
+        letterList.append(letter[u'index'])
+    print gameId
+    game = gameStore.games.getGame(gameId)
+    if (game == None):
+        return "error"
+    try:
+        if (game.tryPlayTurn(playerName, letterList)):
+            return "good"
+        else:
+            return "bad"
+    except:
+        return "exception"
     return "שגיאה כללית"
 
 run(host='0.0.0.0', port=8181)

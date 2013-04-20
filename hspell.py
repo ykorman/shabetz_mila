@@ -47,10 +47,10 @@ class Hspell:
 		self.hspell_lib = ctypes.cdll.LoadLibrary("hspell/libhspell.so")
 		# set location of Hebrew dictionary
 		self.dict_location = ctypes.c_char_p("hspell/hebrew.wgz")
-		self.hspell_lib.hspell_set_dictionary_path(dict_location)
+		self.hspell_lib.hspell_set_dictionary_path(self.dict_location)
 		# initialize hspell dict
 		self.dict_radix = ctypes.POINTER(ctypes.c_int)()
-		res = self.hspell_lib.hspell_init(ctypes.byref(dict_radix),0)
+		res = self.hspell_lib.hspell_init(ctypes.byref(self.dict_radix),0)
 		if (res != 0):
 			raise Exception('Failed to initialize hspell')
 		# allocate integer for the check_word function (later used)

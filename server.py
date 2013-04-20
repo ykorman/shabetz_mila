@@ -4,6 +4,8 @@ import json
 import unicodedata as ud
 import hspell
 
+spell = hspell.Hspell()
+
 class Player:
     def __init__(self, name, password, email):
         self.name = name
@@ -24,39 +26,46 @@ class PlayerList:
         return None
         
 class Game:
-    def __init__(self, player_id, rival_id):
+    def __init__(self, player_id, rival_id, letters=None):
         self.id = random.getrandbits(32)
         self.player_id = player_id
         self.rival_id = rival_id
-        self.letters = self.genletters()
+        if (letters != None):
+            self.letters = letters
+        else:
+            self.letters = self.genletters()
         self.playerLetters = []
         self.rivalLetters = []
         self.whosTurn = player_id
+
 
     def constructWord(self, letterList):
         word = ''
         for index in letterList:
             word += self.letters[index]
+        # print word
         return word
 
     def checkWord(self, word):
-        pass
+        return spell.check_word(word)
         
     def tryPlayTurn(self, player_id, letterList):
-        # check if it's player_id's turn
-        # check if all letters in letterList are indeed in the game
-        # check that the word exists (hspell)
-        # update the letters in playerLetters and rivalLetters
-        # update turn counter
-        
         if (self.whosTurn != player_id):
             raise Exception('Wrong turn')
         word = self.constructWord(letterList)
-        if checkWord(word):
+        if self.checkWord(word):
             self.updateGame(player_id, letterList)
-            return true
+            return True
         else:
-            return false
+            return False
+
+    def updateGame(self, player_id, letterList):
+        if (self.player_id == player_id):
+            self.playerLetters = letterList
+            self.whosTurn = self.rival_id     
+        else:
+            self.rivalLetters = letterList
+            self.whosTurn = self.player_id
             
     def genletters(self):
         l = []

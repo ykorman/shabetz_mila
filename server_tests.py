@@ -71,12 +71,29 @@ class TestGameSerializeToJson(unittest.TestCase):
 
 class TestHspell(unittest.TestCase):
     def testHspellInit(self):
-        h = hspell.hspell()
+        h = hspell.Hspell()
 
     def testHspellWordCheck(self):
-        h = hspell.hspell()
-        self.assertEqual(h.checkWord(u'שלום'), True)
-        self.assertEqual(h.checkWord(u'לושם'), False)
+        h = hspell.Hspell()
+        self.assertEqual(h.check_word(u'שלום'), True)
+        self.assertEqual(h.check_word(u'לושם'), False)
+
+class TestGameTurns(unittest.TestCase):
+    def testGameTurn(self):
+        p1 = server.Player("aaa", "bbb", "ccc")
+        p2 = server.Player("zzz", "yyy", "xxx")
+        alef = 0x05D0
+        letters = [ unichr(alef), unichr(alef+1), unichr(alef+2) ]
+        g = server.Game(p1.name,p2.name, letters)
+        word = [0, 1, 1]
+        self.assertEqual(g.tryPlayTurn(p1.name, word), False)
+        word = [0, 1]
+        self.assertEqual(g.tryPlayTurn(p1.name, word), True)
+        word = [0, 2]
+        self.assertRaises(Exception, g.tryPlayTurn, p1.name, word)
+        self.assertEqual(g.tryPlayTurn(p2.name, word), False)
+        word = [2, 1]
+        self.assertEqual(g.tryPlayTurn(p2.name, word), True)
         
 if __name__ == '__main__':
     unittest.main()
