@@ -2,6 +2,7 @@ import random
 import cPickle
 import json
 import unicodedata as ud
+import hspell
 
 class Player:
     def __init__(self, name, password, email):
@@ -31,6 +32,15 @@ class Game:
         self.playerLetters = []
         self.rivalLetters = []
         self.whosTurn = player_id
+
+    def constructWord(self, letterList):
+        word = ''
+        for index in letterList:
+            word += self.letters[index]
+        return word
+
+    def checkWord(self, word):
+
         
     def tryPlayTurn(self, player_id, letterList):
         # check if it's player_id's turn
