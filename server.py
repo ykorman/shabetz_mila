@@ -25,6 +25,10 @@ class PlayerList:
                 return player
         return None
         
+SM_GAME_STATUS_GOOD = 0
+SM_GAME_STATUS_WRONG_TURN = 1
+SM_GAME_STATUS_BAD_WORD = 2
+
 class Game:
     def __init__(self, player_id, rival_id, letters=None):
         self.id = random.getrandbits(32)
@@ -37,13 +41,13 @@ class Game:
         self.playerLetters = []
         self.rivalLetters = []
         self.whosTurn = player_id
+        self.status = SM_GAME_STATUS_GOOD
 
 
     def constructWord(self, letterList):
         word = ''
         for index in letterList:
             word += self.letters[index]
-        # print word
         return word
 
     def checkWord(self, word):
@@ -51,12 +55,15 @@ class Game:
         
     def tryPlayTurn(self, player_id, letterList):
         if (self.whosTurn != player_id):
-            raise Exception('Wrong turn')
+            self.status = SM_GAME_STATUS_WRONG_TURN
+            return False
         word = self.constructWord(letterList)
         if self.checkWord(word):
             self.updateGame(player_id, letterList)
+            self.status = SM_GAME_STATUS_GOOD
             return True
         else:
+            self.status = SM_GAME_STATUS_BAD_WORD
             return False
 
     def updateGame(self, player_id, letterList):
@@ -107,15 +114,23 @@ class GameList:
         return None
 
 class GameStore:
-    def __init__(self):
+    def __init__(self, db_name = None):
         self.games = GameList()
         self.players = PlayerList()
+        self.db_name = db_name
         
-    def save(self, name):
-        f = open(name, "w")
+    def save(self, name = None):
+        if (name != None):
+            self.db_name = name
+        f = open(self.db_name, "w")
         cPickle.dump(self,f)
+
+    def __del__(self):
+        self.save()
         
-def loadGameStore(name):
+def loadGameStore(name="default_db.dat"):
     f = open(name, "r")
-    return cPickle.load(f)
+    gs = cPickle.load(f)
+    gs.db_name = name
+    return gs
         

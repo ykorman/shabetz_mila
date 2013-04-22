@@ -46,7 +46,7 @@ def start_game():
         gameStore.games.addGame(game)
         return game.toJson()
     else:
-        return "שגיאה כללית"
+        return '{"status": -2}'
 
 @post('/shabetz_mila/submit_word')
 def submit_word():
@@ -56,18 +56,11 @@ def submit_word():
     word = json.loads(request.forms.get('word'))
     letterList = []
     for letter in word:
-        letterList.append(letter[u'index'])
-    print gameId
+        letterList.append(letter[u'index']-1)
     game = gameStore.games.getGame(gameId)
     if (game == None):
-        return "error"
-    try:
-        if (game.tryPlayTurn(playerName, letterList)):
-            return "good"
-        else:
-            return "bad"
-    except:
-        return "exception"
-    return "שגיאה כללית"
+        return '{"status": -1}'
+    game.tryPlayTurn(playerName, letterList)
+    return game.toJson()
 
 run(host='0.0.0.0', port=8181)
