@@ -12,7 +12,7 @@
 					$.mobile.changePage($("#main"));
 					// alert($.cookie("username"));
 				} else
-				$("#loginError").popup("open");		
+					$("#loginError").popup("open");		
 			});
 	});
 	
@@ -27,12 +27,28 @@
 			});
 	});
 
+	$("#existingGame").on('pagebeforeshow', function(event) {
+		var player_name = $.cookie("username");
+		$.post("shabetz_mila/get_gamelist",
+			{ player_name: player_name },
+			function(response) {
+				$("#existingGamesList").empty();
+				$("#existingGamesList").append(response);
+				$("#existingGamesList").trigger('create');
+				$("#existingGamesList").listview('refresh');
+			});
+	});
+
 	$("#submitWord").click(function() {
         var id = appViewModel.gameId;
 		var player_name = appViewModel.aPlayer.name();
 		var rival_name = appViewModel.bPlayer.name();
-		var word = ko.mapping.toJS(appViewModel.selected);
-		console.log(word);
+		//var word = ko.mapping.toJS(appViewModel.selected);
+		var word = new Array();
+        for (var i=0; i < appViewModel.selected().length; i++) {
+            word.push(appViewModel.selected()[i]);
+        }
+        console.log(JSON.stringify(word));
 		$.post("shabetz_mila/submit_word",
 			{ id: id, "player_name": player_name, "rival_name": rival_name, "word": JSON.stringify(word) },
 			function(response) {
@@ -58,6 +74,9 @@
             else            
                 return self.owner();
         });
+        self.toJSON = function() {
+            return { "index" : self.index, "letter" : self.letter() };
+        };
 	};
 
 	function Player(name, score) {
@@ -65,6 +84,27 @@
 		self.name = ko.observable(name);
 		self.score = ko.observable(score);
 	};
+
+/*    ko.bindingHandlers.button = {
+        init: function(element, valueAccessor, allBindingsAccessor) {
+            var cell = ko.utils.unwrapObservable(valueAccessor());
+            // enhance the span with the JQM button plugin (inline)
+            cell.button = $(element).buttonMarkup({ inline: true });
+            cell.button.text(cell.letter());
+            var buttonClick = allBindingsAccessor().buttonClick || {};
+            cell.button.click(cell, buttonClick);
+            cell.button.css('hight','60px').css('width', '40px');
+            ko.utils.domNodeDisposal.
+                addDisposeCallback(cell.button, function() {
+                                cell.button.button("destroy");
+                        });
+        },
+        update: function(element, valueAccessor, allBindingsAccessor) {
+            var cell = ko.utils.unwrapObservable(valueAccessor());
+            var allBindings = allBindingsAccessor();
+            cell.button.text(cell.letter());
+        }
+    };*/
 
 	function AppViewModel() {
 		var self = this; // KO convention	
@@ -82,7 +122,8 @@
 		self.aPlayer = new Player("",0);
 		self.bPlayer = new Player("",0);
 
-		self.select = function(cell) {
+		self.select = function(event) {
+            cell = event;
 			if (cell.selected()) {
 				cell.selected(false);
 				self.selected.remove(cell);
@@ -117,8 +158,12 @@
         };
 
 	}
+    
+    var appViewModel = new AppViewModel();
 
-	appViewModel = new AppViewModel();
-	ko.applyBindings(appViewModel);
+    $("#game").on("pageinit", 
+        function(event) {
+            ko.applyBindings(appViewModel);
+        });
 
 })();

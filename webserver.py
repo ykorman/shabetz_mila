@@ -8,7 +8,7 @@ gameStore = server.loadGameStore("sample_db.dat")
 @route('/shabetz_mila')
 @route('/shabetz_mila/index.html')
 def main_html():
-    return static_file("ui.html", root="./")
+    return static_file("app.html", root="./")
 
 @route('/<script>.js')
 def app_js(script):
@@ -19,7 +19,7 @@ def app_js(script):
 
 @route('/<stylesheet>.css')
 def app_css(stylesheet):
-    if stylesheet in ("bootstrap.min"):
+    if stylesheet in ("bootstrap.min", "app"):
         return static_file(stylesheet + ".css", root="./")
     else:
         abort(404, "no such stylesheet")
@@ -62,5 +62,17 @@ def submit_word():
         return '{"status": -1}'
     game.tryPlayTurn(playerName, letterList)
     return game.toJson()
+
+@post('/shabetz_mila/get_gamelist')
+def get_gamelist():
+    playerName = request.forms.get('player_name')
+    player = gameStore.players.findPlayer(playerName)
+    if (player is None):
+        return '{"status": -1}'
+    gameList = gameStore.games.getGamesByPlayer(player.name)
+    gameListHtml = ''
+    for game in gameList:
+        gameListHtml += '<li>' + str(game.id) + ', "player_name": ' + game.player_id + ', "rival_name": ' + game.rival_id + '</li>'
+    return gameListHtml 
 
 run(host='0.0.0.0', port=8181)

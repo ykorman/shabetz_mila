@@ -142,7 +142,12 @@
 
 		<div data-role="content" dir="rtl" style="font-family: Courier; font-size: large;">
 			<div data-enhance="false">
-				<div id="score">
+				<div id="score" dir="rtl">
+					<span  ata-bind="text: aPlayer.name">משה</span>
+					<span ata-bind="text: aPlayer.score">7</span>
+					<span ata-bind="text: bPlayer.name">אביגל</span>
+					<span ata-bind="text: bPlayer.score">11</span>
+                    <br />
 					<span data-bind="text: aPlayer.name"></span>
 					<span data-bind="text: aPlayer.score"></span>
 					<span data-bind="text: bPlayer.name"></span>

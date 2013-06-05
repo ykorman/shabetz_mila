@@ -113,6 +113,14 @@ class GameList:
                 return game
         return None
 
+    def getGamesByPlayer(self, player_id):
+        player_games_list = []
+        for game in self.list:
+            if ( (game.player_id == player_id) or
+                 (game.rival_id == player_id) ):
+                player_games_list.append(game)
+        return player_games_list
+
 class GameStore:
     def __init__(self, db_name = None):
         self.games = GameList()
