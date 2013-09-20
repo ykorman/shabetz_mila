@@ -61,6 +61,8 @@ class TestGameStore(unittest.TestCase):
         gs.save("test_db.dat")
         gs1 = server.loadGameStore("test_db.dat")
         self.assertNotEqual(gs1.games.getGame(g.id),None)
+	self.assertEqual(gs1.games.getGame(g.id).id, g.id)
+	self.assertEqual(gs1.games.getGame(g.id).lastTurnOn, g.lastTurnOn)
         
 class TestGameSerializeToJson(unittest.TestCase):
     def testSerializeToJson(self):

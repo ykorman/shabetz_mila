@@ -3,6 +3,7 @@ import cPickle
 import json
 import unicodedata as ud
 import hspell
+from datetime import datetime
 
 spell = hspell.Hspell()
 
@@ -42,7 +43,8 @@ class Game:
         self.rivalLetters = []
         self.whosTurn = player_id
         self.status = SM_GAME_STATUS_GOOD
-
+	self.createdOn = datetime.utcnow()
+	self.lastTurnOn = self.createdOn
 
     def constructWord(self, letterList):
         word = ''
@@ -67,6 +69,7 @@ class Game:
             return False
 
     def updateGame(self, player_id, letterList):
+        self.lastTurnOn = datetime.utcnow()
         if (self.player_id == player_id):
             self.playerLetters = letterList
             self.whosTurn = self.rival_id     

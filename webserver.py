@@ -63,6 +63,15 @@ def submit_word():
     game.tryPlayTurn(playerName, letterList)
     return game.toJson()
 
+def convertToExistingGamesJson(playerName, gameList):
+    json = '{ "games": [ '
+    for game in gameList:
+        json += '{ "id": ' + str(game.id) + ','
+	json += '"played_against": "' + (game.rival_id if (game.player_id == playerName) else game.player_id) + '", '
+	json += '"last_turn": "' + game.lastTurnOn.strftime("%m-%d %H:%M") + '" }'
+    json += ' ] }'
+    return json
+
 @post('/shabetz_mila/get_gamelist')
 def get_gamelist():
     playerName = request.forms.get('player_name')
@@ -70,9 +79,15 @@ def get_gamelist():
     if (player is None):
         return '{"status": -1}'
     gameList = gameStore.games.getGamesByPlayer(player.name)
-    gameListHtml = ''
-    for game in gameList:
-        gameListHtml += '<li>' + str(game.id) + ', "player_name": ' + game.player_id + ', "rival_name": ' + game.rival_id + '</li>'
-    return gameListHtml 
+    gameListJson = convertToExistingGamesJson(playerName, gameList)
+    return gameListJson
+
+@post('/shabetz_mila/get_game_by_id')
+def get_game_by_id():
+    gameId = request.forms.get('game_id')
+    game = gameStore.games.getGame(gameId)
+    if (game is None):
+        return '{"status": -1}'
+    return game.toJson()
 
 run(host='0.0.0.0', port=8181)
